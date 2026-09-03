@@ -1,0 +1,21 @@
+# Ensure the script runs with elevated privileges for system-wide installs
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Error "Please run this script as an Administrator."
+    Exit
+}
+
+Write-Host "1. Installing Python and Node.js via WinGet..." -ForegroundColor Cyan
+# --accept-package-agreements bypasses interactive prompts
+winget install --id Python.Python.3 --silent --accept-package-agreements --accept-source-agreements
+winget install --id OpenJS.NodeJS --silent --accept-package-agreements --accept-source-agreements
+
+Write-Host "2. Downloading official Microsoft .NET Installation Script..." -ForegroundColor Cyan
+$dotnetScriptPath = "$env:TEMP\dotnet-install.ps1"
+Invoke-WebRequest -Uri "https://dot.net/v1/dotnet-install.ps1" -OutFile $dotnetScriptPath
+
+Write-Host "3. Installing .NET 8 and .NET 9 Runtimes..." -ForegroundColor Cyan
+# --skip-non-versioned-files prevents earlier runtime versions from overwriting files of the newer version
+powershell -ExecutionPolicy Bypass -File $dotnetScriptPath -Channel 8.0 -Runtime dotnet -SkipNonVersionedFiles
+powershell -ExecutionPolicy Bypass -File $dotnetScriptPath -Channel 9.0 -Runtime dotnet -SkipNonVersionedFiles
+
+Write-Host "Installation Complete! Please restart your terminal/PC to update PATH variables." -ForegroundColor Green
