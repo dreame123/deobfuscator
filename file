@@ -10,4 +10,4 @@ prem acces 1546141138103050361
 owner 1106911816900157552
 out.write_text(result, encoding='utf-8')
 
-LUAJIT          = "C:\\Users\\Gian Ada\\AppData\\Local\\Programs\\LuaJIT\\bin\\luajit.exe"
+LUAJIT = ROOT / "luajit.exe"
