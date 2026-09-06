@@ -9,3 +9,18 @@ channel 1545833070542725201
 prem acces 1546141138103050361
 owner 1106911816900157552
 out.write_text(result, encoding='utf-8')
+
+
+
+# Dynamically find LuaJIT in the user's AppData folder (works for any username)
+local_app_data = os.environ.get("LOCALAPPDATA")
+if local_app_data:
+    luajit_path = pathlib.Path(local_app_data) / "Programs" / "LuaJIT" / "bin" / "luajit.exe"
+    if luajit_path.exists():
+        LUAJIT = str(luajit_path)
+    else:
+        # Fallback to the bot's root folder
+        LUAJIT = str(ROOT / "luajit.exe")
+else:
+    # Fallback to the bot's root folder
+    LUAJIT = str(ROOT / "luajit.exe")
