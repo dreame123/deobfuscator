@@ -8,3 +8,4 @@ https://aka.ms/vs/17/release/vc_redist.x64.exe
 channel 1545833070542725201
 prem acces 1546141138103050361
 owner 1106911816900157552
+out.write_text(result, encoding='utf-8')
