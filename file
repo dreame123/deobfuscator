@@ -11,5 +11,5 @@ owner 1106911816900157552
 out.write_text(result, encoding='utf-8')
 
 LUAJIT = ROOT / "luajit.exe"
-LUAJIT          = "C:\\Users\\Gian Ada\\AppData\\Local\\Programs\\LuaJIT\\bin\\luajit.exe"
+LUAJIT = pathlib.Path(r"C:\Users\vboxuser\AppData\Local\Programs\LuaJIT\bin\luajit.exe")
 
