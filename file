@@ -13,3 +13,10 @@ out.write_text(result, encoding='utf-8')
 LUAJIT = ROOT / "luajit.exe"
 LUAJIT = pathlib.Path(r"C:\Users\vboxuser\AppData\Local\Programs\LuaJIT\bin\luajit.exe")
 
+import os
+local_appdata = os.environ.get("LOCALAPPDATA")
+if local_appdata:
+    LUAJIT = pathlib.Path(local_appdata) / "Programs" / "LuaJIT" / "bin" / "luajit.exe"
+else:
+    LUAJIT = ROOT / "luajit.exe"
+
